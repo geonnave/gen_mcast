@@ -24,8 +24,7 @@ defmodule GenMcast.Producer do
   """
   def handle_demand(demand, {socket, responses}) when demand > 0 do
     IO.puts "there is demand: #{demand}!"
-    {events, responses} = Enum.split(responses, demand) |> IO.inspect
-    # {:noreply, [], {socket, responses}}
+    {events, responses} = Enum.split(responses, demand)
     {:noreply, events, {socket, responses}}
   end
 
@@ -36,8 +35,7 @@ defmodule GenMcast.Producer do
   """
   def handle_info({:udp, socket, ip, port, data}, _state = {socket, responses}) do
     resp = [ip, port, data]
-    new_state = {socket, [resp | responses]} |> IO.inspect
-    # {:noreply, [resp], new_state}
+    new_state = {socket, [resp | responses]}
     {:noreply, [], new_state}
   end
 
