@@ -1,24 +1,12 @@
 # GenMcast
 
-**TODO: Add description**
+Generic ipv4 Multicast using Erlang's :gen_udp and Elixir's brand new GenStage.
 
-## Installation
+# Ideas
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+* Can :gen_udp be wrapped by a GenStage? It seems so.
+* Is it efficient? Let's see.
 
-  1. Add `gen_mcast` to your list of dependencies in `mix.exs`:
+# Current Status
 
-    ```elixir
-    def deps do
-      [{:gen_mcast, "~> 0.1.0"}]
-    end
-    ```
-
-  2. Ensure `gen_mcast` is started before your application:
-
-    ```elixir
-    def application do
-      [applications: [:gen_mcast]]
-    end
-    ```
-
+weird.
