@@ -29,11 +29,8 @@ defmodule GenMcast.Listener do
 
     udp_options = [:binary, reuseaddr: true]
     {:ok, sock} = :gen_udp.open(0, udp_options)
-    :timer.sleep 500
     :gen_udp.send(sock, ip, port, "bye!")
-    :timer.sleep 1000
     :gen_udp.send(sock, ip, port, "bye2!")
-    :timer.sleep 500
     :gen_udp.send(sock, ip, port, "bye33!")
     :gen_udp.close(sock)
 

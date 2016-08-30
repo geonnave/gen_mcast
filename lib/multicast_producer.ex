@@ -6,7 +6,7 @@ defmodule GenMcast.Producer do
   @mcast_port 49999
   @mcast_group {224,1,1,1}
 
-  def start_link(opts \\ []) do
+  def start_link(_opts \\ []) do
     GenStage.start_link __MODULE__, "msg", name: __MODULE__
   end
 
@@ -20,25 +20,25 @@ defmodule GenMcast.Producer do
   end
 
   @doc """
+  Will produce for the required demand!
+  """
+  def handle_demand(demand, {socket, responses}) when demand > 0 do
+    IO.puts "there is demand: #{demand}!"
+    {events, responses} = Enum.split(responses, demand) |> IO.inspect
+    # {:noreply, [], {socket, responses}}
+    {:noreply, events, {socket, responses}}
+  end
+
+  @doc """
   This is a normal :gen_udp callback that receives back a message. The
   idea is that the responses are accumulated in the `state`; this way,
   the responses are only consumed when there is demand for it.
   """
   def handle_info({:udp, socket, ip, port, data}, _state = {socket, responses}) do
     resp = [ip, port, data]
-    new_state = {socket, [resp | responses]}
+    new_state = {socket, [resp | responses]} |> IO.inspect
     # {:noreply, [resp], new_state}
     {:noreply, [], new_state}
-  end
-
-  @doc """
-  Will produce for the required demand!
-  """
-  def handle_demand(demand, {socket, responses}) when demand > 0 do
-    IO.puts "there is demand: #{demand}!"
-    {events, responses} = Enum.split(responses, demand)
-    # {:noreply, [], {socket, responses}}
-    {:noreply, events, {socket, responses}}
   end
 
   def handle_info(:timeout, state = {socket, _}) do
