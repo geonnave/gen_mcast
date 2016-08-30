@@ -2,13 +2,13 @@
 
 Generic ipv4 Multicast using Erlang's :gen_udp and Elixir's brand new GenStage.
 
-Test it with `mix run lib/consumer.ex`
+Test it with `mix deps.get && mix test`
 
 # Ideas
 
-* Can :gen_udp be wrapped by a GenStage? It seems so.
+* Can :gen_udp be wrapped by a GenStage? *yes*.
 * Is it efficient? Let's see.
 
 # Current Status
 
-weird.
+It Works!
