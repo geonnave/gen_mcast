@@ -13,6 +13,7 @@ defmodule GenMcast.Consumer do
 
   def handle_events(new_services, _from, state) do
     IO.puts "in consumer: #{inspect new_services}"
+    :timer.sleep 500
     {:noreply, [], state}
   end
 end

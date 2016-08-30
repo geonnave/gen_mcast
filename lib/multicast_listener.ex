@@ -25,7 +25,7 @@ defmodule GenMcast.Listener do
   def handle_info({:udp, socket, ip, port, data}, state) do
     # when we popped one message we allow one more to be buffered
     :inet.setopts(socket, [active: 1])
-    IO.puts "in listener: #{inspect [ip, port, data]}!"
+    IO.puts "in listener: #{inspect {ip, port, data}}!"
 
     udp_options = [:binary, reuseaddr: true]
     {:ok, sock} = :gen_udp.open(0, udp_options)
